@@ -1,0 +1,9 @@
+{
+  "composite": true,
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./build/types"
+  },
+  "files": ["src/main.tsx"],
+  "include": ["src"]
+}
