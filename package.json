@@ -12,6 +12,10 @@
       "default": "./dist/index.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/c99pjn/react-io-virtual-list"
+  },
   "scripts": {
     "build": "tsc"
   },
