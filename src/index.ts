@@ -1,1 +1,1 @@
-export { VirtualList } from './VitualList'
+export { VirtualList, VirtualListHandle } from './VitualList'

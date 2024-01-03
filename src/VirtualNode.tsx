@@ -90,7 +90,7 @@ export const VirtualNode: React.FC<VirtualNodeProps> = (props) => {
 
   React.useEffect(() => observe(ref, onObserve), [observe, onObserve]);
   React.useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let timeout: number;
     if (firstIndex === scrollTo?.index && nrItems === 1) {
       ref.current?.scrollIntoView(scrollTo.options);
       timeout = setTimeout(() => {
