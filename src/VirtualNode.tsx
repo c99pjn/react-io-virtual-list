@@ -37,11 +37,15 @@ type VirtualNodeProps = {
     ref: React.RefObject<Element>,
     callback: IntersectionCallback
   ) => Cancel;
-  renderItem: (index: number) => React.ReactElement;
-  renderPlaceholder: (args: {
+  renderItem: React.ElementType<{
+    index: number;
+    expectedWidth?: number;
+    expectedHeight?: number;
+  }>;
+  renderPlaceholder: React.ElementType<{
     height?: number;
     width?: number;
-  }) => React.JSX.Element;
+  }>;
   intersection: Intersection | null;
   sizes: SizeMap;
   sizeKey: "width" | "height";
@@ -55,8 +59,8 @@ export const VirtualNode: React.FC<VirtualNodeProps> = (props) => {
     firstIndex,
     estimatedSize,
     observe,
-    renderItem,
-    renderPlaceholder,
+    renderItem: Item,
+    renderPlaceholder: Placeholder,
     intersection,
     sizes,
     sizeKey,
@@ -116,16 +120,21 @@ export const VirtualNode: React.FC<VirtualNodeProps> = (props) => {
     placeholderHeight.current = size;
     return (
       <NodeWrapper ref={ref} isHorizontal={isHorizontal}>
-        {renderPlaceholder({ [sizeKey]: size })}
+        <Placeholder {...{ [sizeKey]: size }} />
       </NodeWrapper>
     );
   }
-  if (nrItems === 1)
+  if (nrItems === 1) {
     return (
       <NodeWrapper ref={ref} isHorizontal={isHorizontal}>
-        {renderItem(firstIndex)}
+        <Item
+          index={firstIndex}
+          expectedHeight={sizeKey === "height" ? size : undefined}
+          expectedWidth={sizeKey === "width" ? size : undefined}
+        />
       </NodeWrapper>
     );
+  }
 
   const [node1, node2] = splitItems({ nrItems, firstIndex });
   const [topIntersection, bottomIntersection] = splitIntersection(

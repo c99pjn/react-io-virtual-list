@@ -1,5 +1,5 @@
 import * as React from "react";
-import { VirtualList, VirtualListHandle } from "../../src/VitualList";
+import { VirtualList, VirtualListHandle } from "react-io-virtual-list";
 import "./styles.css";
 
 type Props = {
@@ -30,7 +30,7 @@ export const ListHorizontal = ({
           border: "1px solid black",
         }}
       >
-        {`Item ${index + 1}`}
+        {`Item ${index}`}
       </div>
     );
   };
@@ -53,7 +53,7 @@ export const ListHorizontal = ({
           estimatedSize={75}
           initialInView={10}
           scrollContainerRef={ref}
-          Item={Item}
+          renderItem={Item}
           nrItemsOverscan={nrItemsOverscan}
           observerType={observerType}
           handleRef={handleRef}

@@ -1,26 +1,25 @@
 import * as React from "react";
-import { VirtualList, VirtualListHandle } from "../../src/VitualList";
+import { VirtualList, VirtualListHandle } from "react-io-virtual-list";
+import { Controls } from "./Controls";
 import "./styles.css";
 
 type Props = {
   observerType: "intersectionObserver" | "scrollEvent";
-  nrItemsOverscan?: number;
-  nrItems?: number;
 };
 
-export const List = ({
-  observerType,
-  nrItemsOverscan = 0,
-  nrItems = 200,
-}: Props) => {
+export const List = ({ observerType }: Props) => {
+  const [controls, setControls] = React.useState({
+    nrItems: 100,
+    nrItemsOverscan: 0,
+  });
+
   const ref = React.useRef<HTMLDivElement | null>(null);
   const handleRef = React.useRef<VirtualListHandle>();
-  const heights = Array.from({ length: nrItems }, () =>
+  const heights = Array.from({ length: controls.nrItems }, () =>
     Math.floor(Math.random() * 80 + 20)
   );
 
   const Item = ({ index }: { index: number }) => {
-    console.log(index);
     return (
       <div
         className="list-item"
@@ -30,7 +29,7 @@ export const List = ({
           border: "1px solid black",
         }}
       >
-        {`Item ${index + 1}`}
+        {`Item ${index}`}
       </div>
     );
   };
@@ -42,25 +41,21 @@ export const List = ({
         style={{ overflow: "scroll", height: "200px", width: "200px" }}
       >
         <VirtualList
-          nrItems={nrItems}
+          nrItems={controls.nrItems}
           estimatedSize={60}
           initialInView={10}
           scrollContainerRef={ref}
-          nrItemsOverscan={nrItemsOverscan}
+          nrItemsOverscan={controls.nrItemsOverscan}
           observerType={observerType}
           handleRef={handleRef}
-          Item={Item}
+          renderItem={Item}
         />
       </div>
-      <div className="controls">
-        <button
-          onClick={() => {
-            handleRef.current?.scrollTo(100);
-          }}
-        >
-          Scroll
-        </button>
-      </div>
+      <Controls
+        controls={controls}
+        setControls={setControls}
+        handleRef={handleRef}
+      />
     </div>
   );
 };

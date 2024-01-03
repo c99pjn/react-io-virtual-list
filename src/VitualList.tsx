@@ -30,10 +30,17 @@ type VirtualListProps = {
    */
   scrollContainerRef: React.RefObject<HTMLElement>;
   /**
-   * The item component to render.
+   * The item component to render. Expected sizes are provided in case a placeholder
+   * needs to be rendered, for example when fetching data.
    * @param index - The index of the item in the list
+   * @param expectedWidth - If horizontal, the expected width.
+   * @param expectedHeight - If vertical, the expected height
    */
-  Item: React.ElementType<{ index: number }>;
+  renderItem: React.ElementType<{
+    index: number;
+    expectedWidth?: number;
+    expectedHeight?: number;
+  }>;
   /**
    * An optional placeholder component to used to render spacers in the list.
    * A spacer might might substiture one or more items.
@@ -41,7 +48,7 @@ type VirtualListProps = {
    * @param height - If vertical, the height in pixels the spacer needs to be
    * @default '({ height, width }) => <div style={{ height, width }} />'
    */
-  Placeholder?: React.ElementType<PlaceholderProps>;
+  renderPlaceholder?: React.ElementType<PlaceholderProps>;
   /**
    * The number extra items to render above or below the visible area calculated
    * based on the estimated size.
@@ -90,8 +97,8 @@ const VirtualListInner: React.FC<
   nrItems,
   estimatedSize,
   scrollContainerRef,
-  Item,
-  Placeholder = ({ height, width }) => <div style={{ height, width }} />,
+  renderItem,
+  renderPlaceholder = ({ height, width }) => <div style={{ height, width }} />,
   nrItemsOverscan = 0,
   direction = "vertical",
   sizeMap = {},
@@ -114,20 +121,6 @@ const VirtualListInner: React.FC<
       getSizeMap: () => sizes.current,
     }),
     []
-  );
-
-  const renderItem = React.useCallback(
-    (index: number) => {
-      return <Item index={index} />;
-    },
-    [Item]
-  );
-
-  const renderPlaceholder = React.useCallback(
-    (args: PlaceholderProps) => {
-      return <Placeholder {...args} />;
-    },
-    [Placeholder]
   );
 
   const intersection = React.useMemo(() => {
