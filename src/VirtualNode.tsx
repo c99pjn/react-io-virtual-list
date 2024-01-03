@@ -75,7 +75,6 @@ export const VirtualNode: React.FC<VirtualNodeProps> = (props) => {
 
   const key = getKey({ firstIndex, nrItems });
   const size = sizes[key] ?? nrItems * estimatedSize;
-  const placeholderHeight = React.useRef(estimatedSize);
 
   const onObserve: IntersectionCallback = React.useCallback(
     (inV, entry) => {
@@ -117,7 +116,6 @@ export const VirtualNode: React.FC<VirtualNodeProps> = (props) => {
       firstIndex + nrItems > scrollTo.index
     )
   ) {
-    placeholderHeight.current = size;
     return (
       <NodeWrapper ref={ref} isHorizontal={isHorizontal}>
         <Placeholder {...{ [sizeKey]: size }} />

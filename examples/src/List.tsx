@@ -5,9 +5,10 @@ import "./styles.css";
 
 type Props = {
   observerType: "intersectionObserver" | "scrollEvent";
+  direction: "horizontal" | "vertical";
 };
 
-export const List = ({ observerType }: Props) => {
+export const List = ({ observerType, direction }: Props) => {
   const [controls, setControls] = React.useState({
     nrItems: 100,
     nrItemsOverscan: 0,
@@ -15,7 +16,7 @@ export const List = ({ observerType }: Props) => {
 
   const ref = React.useRef<HTMLDivElement | null>(null);
   const handleRef = React.useRef<VirtualListHandle>();
-  const heights = Array.from({ length: controls.nrItems }, () =>
+  const sizes = Array.from({ length: controls.nrItems }, () =>
     Math.floor(Math.random() * 80 + 20)
   );
 
@@ -24,8 +25,9 @@ export const List = ({ observerType }: Props) => {
       <div
         className="list-item"
         style={{
-          height: `${heights[index]}px`,
-          marginBottom: "20px",
+          [direction === "vertical" ? "height" : "width"]: `${sizes[index]}px`,
+          [direction === "vertical" ? "marginBottom" : "marginInlineEnd"]:
+            "20px",
           border: "1px solid black",
         }}
       >
@@ -49,6 +51,7 @@ export const List = ({ observerType }: Props) => {
           observerType={observerType}
           handleRef={handleRef}
           renderItem={Item}
+          direction={direction}
         />
       </div>
       <Controls
