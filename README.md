@@ -4,6 +4,16 @@ A react virtual scrolling component implemented by splitting the items into a bi
 
 Due to the way the component works, some extra wrapping elements are added and list elements won't be rendered as siblings. This limits some of the styling that can be done, for example spacing the items with a grid or flexbox.
 
+## Install
+
+```bash
+# Yarn
+yarn add react-io-virtual-list
+
+# NPM
+npm install --save react-io-virtual-list
+```
+
 ## Features
 
 - Very simple with almost zero DOM querying
