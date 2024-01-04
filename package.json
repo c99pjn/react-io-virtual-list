@@ -1,7 +1,7 @@
 {
   "name": "react-io-virtual-list",
   "version": "1.0.0",
-  "description": "React virtual scroll component",
+  "description": "React virtual scroll component using intersectionObserver",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -23,6 +23,16 @@
   },
   "author": "Peter Johansson",
   "license": "ISC",
+  "keywords": [
+    "react",
+    "virtual",
+    "virtualized",
+    "list",
+    "scroll",
+    "scrolling",
+    "intersectionObserver",
+    "dynamic"
+  ],
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
