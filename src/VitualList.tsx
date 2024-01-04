@@ -42,15 +42,15 @@ type VirtualListProps = {
     expectedHeight?: number;
   }>;
   /**
-   * An optional placeholder component to used to render spacers in the list.
-   * A spacer might might substiture one or more items.
+   * An optional placeholder component to be used to render spacers in the list.
+   * A spacer might substitute one or more items.
    * @param width - If horizontal, the width in pixels the spacer needs to be
    * @param height - If vertical, the height in pixels the spacer needs to be
    * @default '({ height, width }) => <div style={{ height, width }} />'
    */
   renderPlaceholder?: React.ElementType<PlaceholderProps>;
   /**
-   * The number extra items to render above or below the visible area calculated
+   * The number of extra items to render above or below the visible area calculated
    * based on the estimated size.
    * @default 0
    */
@@ -61,13 +61,13 @@ type VirtualListProps = {
    */
   direction?: "vertical" | "horizontal";
   /**
-   * Optionally pass in an initial size map if known, for example gotte through
+   * Optionally pass in an initial size map if known, for example gotten through
    * 'getSizeMap'. Useful for exact scroll restoration where you would, for example,
    * save the size map on unmount and pass it in again when remounting
    */
   sizeMap?: SizeMap;
   /**
-   * Specifify the type of observer to be used
+   * Specify the type of observer to be used
    *
    * intersectionObserver - uses an intersection observer to detect when items are
    * scrolled into view. This is generally a more performant option when it comes to
