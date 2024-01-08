@@ -1,9 +1,0 @@
-.vertical-virtual-node {
-  display: flex;
-  flex-direction: column;
-}
-
-.horizontal-virtual-node {
-  display: inline-block;
-  white-space: nowrap;
-}

@@ -2,8 +2,8 @@
   "include": ["src"],
   "compilerOptions": {
     "outDir": "dist",
-    "module": "ES6",
-    "target": "ES6",
+    "module": "ESNext",
+    "target": "ESNext",
     "lib": ["es6", "dom"],
     "sourceMap": true,
     "allowJs": true,

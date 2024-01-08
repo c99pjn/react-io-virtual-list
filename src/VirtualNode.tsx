@@ -12,7 +12,6 @@ import {
   splitIntersection,
   splitItems,
 } from "./utils";
-import "./styles.css";
 
 const NodeWrapper = React.forwardRef<
   HTMLDivElement,
@@ -22,7 +21,11 @@ const NodeWrapper = React.forwardRef<
     <div
       ref={ref}
       role="presentation"
-      className={`${isHorizontal ? "horizontal" : "vertical"}-virtual-node`}
+      style={
+        isHorizontal
+          ? { display: "inline-block", whiteSpace: "nowrap" }
+          : { display: "flex", flexDirection: "column" }
+      }
     >
       {children}
     </div>
@@ -93,7 +96,7 @@ export const VirtualNode: React.FC<VirtualNodeProps> = (props) => {
 
   React.useEffect(() => observe(ref, onObserve), [observe, onObserve]);
   React.useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
     if (firstIndex === scrollTo?.index && nrItems === 1) {
       ref.current?.scrollIntoView(scrollTo.options);
       timeout = setTimeout(() => {

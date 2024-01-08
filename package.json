@@ -2,24 +2,27 @@
   "name": "react-io-virtual-list",
   "version": "1.0.0",
   "description": "React virtual scroll component using intersectionObserver",
-  "main": "dist/index.js",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+    "types": "./dist/index.d.ts",
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/c99pjn/react-io-virtual-list"
   },
   "scripts": {
-    "clean": "rimraf dist/",
-    "copy-files": "copyfiles -u 1 src/*.html src/*.css dist/",
-    "build": "npm run clean && tsc && npm run copy-files"
+    "build": "microbundle --jsx React.createElement",
+    "dev": "microbundle --jsx React.createElement watch"
   },
   "author": "Peter Johansson",
   "license": "ISC",
@@ -38,13 +41,12 @@
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
-    "copyfiles": "^2.4.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "microbundle": "^0.15.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
